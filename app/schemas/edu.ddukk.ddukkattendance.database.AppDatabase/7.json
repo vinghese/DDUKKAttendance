@@ -1,0 +1,488 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 7,
+    "identityHash": "f82090adc86ee88cc73b279efc61d9f3",
+    "entities": [
+      {
+        "tableName": "user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT NOT NULL, `last_name` TEXT, `email` TEXT NOT NULL, `college_id` TEXT NOT NULL, `password` TEXT NOT NULL, `role` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "last_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collegeId",
+            "columnName": "college_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "role",
+            "columnName": "role",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "timetable",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`table_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `day_of_week` TEXT NOT NULL, `start_time` TEXT NOT NULL, `end_time` TEXT NOT NULL, `period` TEXT NOT NULL, `programs_id` INTEGER NOT NULL, `semester_id` INTEGER NOT NULL, `subject_id` TEXT NOT NULL, `instructor_id` INTEGER, `break_id` INTEGER, FOREIGN KEY(`subject_id`) REFERENCES `subjects`(`subject_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`instructor_id`) REFERENCES `instructors`(`instructor_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`break_id`) REFERENCES `breaks`(`break_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`programs_id`) REFERENCES `programs`(`programs_id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`semester_id`) REFERENCES `semesters`(`semester_id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "tableId",
+            "columnName": "table_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dayOfWeek",
+            "columnName": "day_of_week",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startTime",
+            "columnName": "start_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endTime",
+            "columnName": "end_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "period",
+            "columnName": "period",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "programmeId",
+            "columnName": "programs_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "semesterId",
+            "columnName": "semester_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subjectId",
+            "columnName": "subject_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "instructorId",
+            "columnName": "instructor_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "breakId",
+            "columnName": "break_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "table_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_timetable_subject_id_instructor_id_programs_id_break_id_semester_id",
+            "unique": false,
+            "columnNames": [
+              "subject_id",
+              "instructor_id",
+              "programs_id",
+              "break_id",
+              "semester_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_subject_id_instructor_id_programs_id_break_id_semester_id` ON `${TABLE_NAME}` (`subject_id`, `instructor_id`, `programs_id`, `break_id`, `semester_id`)"
+          },
+          {
+            "name": "index_timetable_table_id",
+            "unique": false,
+            "columnNames": [
+              "table_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_table_id` ON `${TABLE_NAME}` (`table_id`)"
+          },
+          {
+            "name": "index_timetable_programs_id",
+            "unique": false,
+            "columnNames": [
+              "programs_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_programs_id` ON `${TABLE_NAME}` (`programs_id`)"
+          },
+          {
+            "name": "index_timetable_semester_id",
+            "unique": false,
+            "columnNames": [
+              "semester_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_semester_id` ON `${TABLE_NAME}` (`semester_id`)"
+          },
+          {
+            "name": "index_timetable_subject_id",
+            "unique": false,
+            "columnNames": [
+              "subject_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_subject_id` ON `${TABLE_NAME}` (`subject_id`)"
+          },
+          {
+            "name": "index_timetable_instructor_id",
+            "unique": false,
+            "columnNames": [
+              "instructor_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_instructor_id` ON `${TABLE_NAME}` (`instructor_id`)"
+          },
+          {
+            "name": "index_timetable_break_id",
+            "unique": false,
+            "columnNames": [
+              "break_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_timetable_break_id` ON `${TABLE_NAME}` (`break_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "subjects",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "subject_id"
+            ],
+            "referencedColumns": [
+              "subject_id"
+            ]
+          },
+          {
+            "table": "instructors",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "instructor_id"
+            ],
+            "referencedColumns": [
+              "instructor_id"
+            ]
+          },
+          {
+            "table": "breaks",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "break_id"
+            ],
+            "referencedColumns": [
+              "break_id"
+            ]
+          },
+          {
+            "table": "programs",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "programs_id"
+            ],
+            "referencedColumns": [
+              "programs_id"
+            ]
+          },
+          {
+            "table": "semesters",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "semester_id"
+            ],
+            "referencedColumns": [
+              "semester_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "subjects",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`subject_id` INTEGER NOT NULL, `subject_code` TEXT NOT NULL DEFAULT '23-493-', `subject_name` TEXT NOT NULL, PRIMARY KEY(`subject_id`))",
+        "fields": [
+          {
+            "fieldPath": "subjectId",
+            "columnName": "subject_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subject_code",
+            "columnName": "subject_code",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'23-493-'"
+          },
+          {
+            "fieldPath": "subjectName",
+            "columnName": "subject_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "subject_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_subjects_subject_id",
+            "unique": false,
+            "columnNames": [
+              "subject_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_subjects_subject_id` ON `${TABLE_NAME}` (`subject_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "instructors",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`instructor_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `instructor_name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "instructorId",
+            "columnName": "instructor_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "instructorName",
+            "columnName": "instructor_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "instructor_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_instructors_instructor_id",
+            "unique": false,
+            "columnNames": [
+              "instructor_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_instructors_instructor_id` ON `${TABLE_NAME}` (`instructor_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "semesters",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`semester_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `semester_name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "programsId",
+            "columnName": "semester_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "programeName",
+            "columnName": "semester_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "semester_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_semesters_semester_id",
+            "unique": false,
+            "columnNames": [
+              "semester_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_semesters_semester_id` ON `${TABLE_NAME}` (`semester_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "breaks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`break_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `break_type` TEXT NOT NULL, `break_start_time` TEXT NOT NULL, `break_end_time` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "breakId",
+            "columnName": "break_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "breakType",
+            "columnName": "break_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "breakStartTime",
+            "columnName": "break_start_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "breakEndTime",
+            "columnName": "break_end_time",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "break_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_breaks_break_id",
+            "unique": false,
+            "columnNames": [
+              "break_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_breaks_break_id` ON `${TABLE_NAME}` (`break_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "programs",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`programs_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `programs_code` TEXT NOT NULL, `programs_name` TEXT NOT NULL, `number_of_semesters` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "programsId",
+            "columnName": "programs_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "programsCode",
+            "columnName": "programs_code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "programeName",
+            "columnName": "programs_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numberOfSemesters",
+            "columnName": "number_of_semesters",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "programs_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_programs_programs_id",
+            "unique": false,
+            "columnNames": [
+              "programs_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_programs_programs_id` ON `${TABLE_NAME}` (`programs_id`)"
+          },
+          {
+            "name": "index_programs_programs_code",
+            "unique": false,
+            "columnNames": [
+              "programs_code"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_programs_programs_code` ON `${TABLE_NAME}` (`programs_code`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f82090adc86ee88cc73b279efc61d9f3')"
+    ]
+  }
+}

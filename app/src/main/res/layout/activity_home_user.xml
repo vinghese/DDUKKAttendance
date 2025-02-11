@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserHomeActivity">
+
+    <Spinner
+        android:id="@+id/spinnerBreakType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        android:spinnerMode="dropdown" />
+
+    <EditText
+        android:id="@+id/etTimeStartBreaks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="[Start Time]"
+        android:inputType="time"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etTimeEndBreaks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="[End Time]"
+        android:inputType="time"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btnBreaks_Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_breaks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

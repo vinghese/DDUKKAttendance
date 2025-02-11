@@ -1,0 +1,6 @@
+extensions
+
+androidx.room:room-ktx 2.6.1
+androidx.room:room-runtime 2.6.1
+androidx.lifecycle:lifecycle-extensions 2.2.0  ksp("androidx.room:room-compiler:2.6.1")
+    
