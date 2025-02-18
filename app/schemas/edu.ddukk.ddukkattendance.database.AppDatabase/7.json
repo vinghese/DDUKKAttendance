@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "f82090adc86ee88cc73b279efc61d9f3",
+    "identityHash": "e0a8e1ca6d2160a1b797f2441446839d",
     "entities": [
       {
         "tableName": "user",
@@ -479,10 +479,15 @@
         "foreignKeys": []
       }
     ],
-    "views": [],
+    "views": [
+      {
+        "viewName": "TimeTableView",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS select timetable.table_id,timetable.day_of_week,timetable.start_time,timetable.end_time,timetable.period,subjects.subject_name,instructors.instructor_name from timetable inner join subjects on timetable.subject_id = subjects.subject_id inner join instructors on instructors.instructor_id = timetable.instructor_id"
+      }
+    ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f82090adc86ee88cc73b279efc61d9f3')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e0a8e1ca6d2160a1b797f2441446839d')"
     ]
   }
 }

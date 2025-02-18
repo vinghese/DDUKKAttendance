@@ -39,6 +39,13 @@ class LoginActivity : AppCompatActivity() {
             insets
 
         }
+
+        lifecycleScope.launch {
+            userDAO.getUsers()
+        }
+
+
+
         btnLogin.setOnClickListener {
 
             startActivity(
@@ -58,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(
                                 Intent(
                                     applicationContext,
-                                    UserHomeActivity::class.java
+                                    BreaksActivity::class.java
                                 )
                             )
                         else

@@ -24,7 +24,7 @@ import edu.ddukk.ddukkattendance.models.Breaks
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
-class UserHomeActivity : AppCompatActivity() {
+class BreaksActivity : AppCompatActivity() {
 
     lateinit var breakType: String
     val etStart: EditText by lazy { findViewById(R.id.etTimeStartBreaks) }
@@ -39,7 +39,7 @@ class UserHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_user)
+        setContentView(R.layout.activity_breaks)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars =
                 insets.getInsets(WindowInsetsCompat.Type.systemBars())

@@ -93,7 +93,7 @@ class AdminHomeActivity : AppCompatActivity() {
                     startActivity(
                         Intent(
                             applicationContext,
-                            UserHomeActivity::class.java
+                            BreaksActivity::class.java
                         )
                     )
                 }
