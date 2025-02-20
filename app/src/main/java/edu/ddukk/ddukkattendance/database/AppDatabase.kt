@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import edu.ddukk.ddukkattendance.dao.BreaksDAO
+import edu.ddukk.ddukkattendance.dao.TimeTableViewDAO
 import edu.ddukk.ddukkattendance.dao.UserDAO
 import edu.ddukk.ddukkattendance.models.Breaks
 import edu.ddukk.ddukkattendance.models.Instructors
@@ -26,6 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDAO(): UserDAO
     abstract fun breaksDAO(): BreaksDAO
+    abstract fun timetableViewDAO(): TimeTableViewDAO
 
     companion object {
 

@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.extensions)
 
     implementation(libs.androidx.room.ktx)
+//    implementation(libs.cardview.v7)
 
     ksp(libs.androidx.room.compiler)
 //    "androidx.room:room-compiler:2.6.1"

@@ -8,15 +8,56 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import edu.ddukk.ddukkattendance.adapters.RecyclerAdapter
+import edu.ddukk.ddukkattendance.dao.TimeTableViewDAO
+import edu.ddukk.ddukkattendance.database.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class TimetableFragment : Fragment() {
 
     lateinit var spinnerItemSelected: String
 
+    val timeTableViewDAO: TimeTableViewDAO by lazy {
+        AppDatabase.getDatabase(requireContext()).timetableViewDAO()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView: RecyclerView =
+            view.findViewById(R.id.recycleTimetable)
+
+        recyclerView.layoutManager =
+            GridLayoutManager(view.context, 2)
+
+        lifecycleScope.launch {
+
+            var adapter: RecyclerAdapter = RecyclerAdapter(emptyList())
+            recyclerView.adapter = adapter
+
+            adapter.isLoading = true
+            adapter.notifyItemInserted(adapter.itemCount)
+
+            val items = withContext(Dispatchers.IO) {
+                delay(2000)
+                timeTableViewDAO.getTimetableByDay("Monday")
+            }
+
+            adapter.isLoading = false
+            adapter = RecyclerAdapter(items)
+            recyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+        }
+
 
         val spinner: Spinner = view.findViewById(R.id.spinnerTimetable)
 
@@ -42,6 +83,7 @@ class TimetableFragment : Fragment() {
                 id: Long
             ) {
                 spinnerItemSelected = spinnerItem[position].toString()
+
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
